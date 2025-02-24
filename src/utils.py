@@ -44,7 +44,7 @@ class FileRepository(Repository):
             with open(self.filename, 'r', encoding='utf-8') as json_file:
                 content = json_file.read()
                 if not content:
-                    return [] # Если файл пуст, возвращаем пустой список
+                    return []  # Если файл пуст, возвращаем пустой список
                 vacancies = json.loads(content)
 
             for vacancy in vacancies:
@@ -110,7 +110,7 @@ class FileRepository(Repository):
         vacancies = self._read_json()
 
         filtered_vacancies_by_keyword = []
-        if keyword: # если задано ключевое слово
+        if keyword:  # если задано ключевое слово
             for vacancy in vacancies:
                 # Приводим оба значения к нижнему регистру
                 if keyword.lower() in vacancy.name.lower():
@@ -118,10 +118,10 @@ class FileRepository(Repository):
         else:
             filtered_vacancies_by_keyword = vacancies
 
-        if top_n: # если задано кол-во вакансий для вывода, сортируем по зарплате
+        if top_n:  # если задано кол-во вакансий для вывода, сортируем по зарплате
             filtered_vacancies_by_keyword = [
                 v for v in filtered_vacancies_by_keyword
-                if v.salary_from > 0 # Исключаем вакансии без зарплаты
+                if v.salary_from > 0  # Исключаем вакансии без зарплаты
             ]
             filtered_vacancies_by_keyword.sort(key=lambda x: x.salary_from, reverse=True)
             return filtered_vacancies_by_keyword[:top_n]

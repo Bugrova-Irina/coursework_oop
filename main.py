@@ -1,6 +1,5 @@
 from src.api_connection import HeadHunter
 from src.utils import FileRepository
-from src.vacancy import Vacancy
 
 
 def user_interaction():
