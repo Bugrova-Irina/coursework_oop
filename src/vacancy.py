@@ -24,7 +24,7 @@ class Vacancy:
         self.salary_to = 0
         self.get_salary()
 
-    def get_salary(self):
+    def get_salary(self) -> None:
         """Отбор вакансий по зарплате"""
         if self._salary:
             self.salary_from = self._salary.get('from') or 0
