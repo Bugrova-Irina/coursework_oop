@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch, MagicMock, mock_open
 
 from src.api_connection import HeadHunter
-from src.vacancy import Vacancy
+
 from tests.conftest import hh_vacancy
 
 

@@ -25,10 +25,11 @@ class Vacancy:
         self.get_salary()
 
     def get_salary(self) -> None:
-        """Отбор вакансий по зарплате"""
-        if self._salary:
+        """Обработка данных о зарплате"""
+        if self._salary:  # если есть данные о зарплате
             self.salary_from = self._salary.get('from') or 0
             self.salary_to = self._salary.get('to') or 0
+            # переводим в целые числа при необходимости
             self.salary_from = int(self.salary_from) if self.salary_from else 0
             self.salary_to = int(self.salary_to) if self.salary_to else 0
 

@@ -144,3 +144,30 @@ def hh_vacancy():
             description='Work closely with mobile...'
         )
     ]
+
+
+@pytest.fixture
+def instance_vacancy_without_salary():
+    return Vacancy(
+        id=117539614,
+        name='Разработчик бэк-энда Python',
+        link='https://hh.ru/vacancy/117539614',
+        salary=None,
+        area='Ташкент',
+        description='Work closely with mobile...'
+    )
+
+
+@pytest.fixture
+def instance_vacancy():
+    return Vacancy(
+        id=117539614,
+        name='Разработчик бэк-энда Python',
+        link='https://hh.ru/vacancy/117539614',
+        salary={
+            'from': 100000,
+            'to': 500000,
+        },
+        area='Ташкент',
+        description='Work closely with mobile...'
+    )
