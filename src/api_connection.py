@@ -3,7 +3,7 @@ from typing import Any, Optional
 
 import requests
 
-from src.vacancy import Vacancy
+from vacancy import Vacancy
 
 
 class API(ABC):
@@ -95,7 +95,15 @@ class HeadHunter(API):
         ]
 
 
-# hh_vacancies = HeadHunter('Moscow', 1, 1, 'Python')
-# hh_vacancies.get_row_vacancies()
-# data_set_vacancy = hh_vacancies.get_vacancies('Python')
+# hh_vacancies = HeadHunter(
+#     "https://api.hh.ru/vacancies",
+#     {'User-Agent': 'HH-User-Agent'},
+#     {'text': '', 'page': 0, 'per_page': 100},
+#     'Moscow',
+#     1,
+#     1,
+#     'Python'
+# )
+# print(hh_vacancies.get_row_vacancies())
+# data_set_vacancy = hh_vacancies.get_vacancies()
 # print(data_set_vacancy)
