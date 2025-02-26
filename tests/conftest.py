@@ -171,3 +171,18 @@ def instance_vacancy():
         area='Ташкент',
         description='Work closely with mobile...'
     )
+
+
+@pytest.fixture
+def instance_vacancy_high_salary():
+    return Vacancy(
+        id=117539614,
+        name='Разработчик бэк-энда Python',
+        link='https://hh.ru/vacancy/117539614',
+        salary={
+            'from': 300000,
+            'to': 800000,
+        },
+        area='Ташкент',
+        description='Work closely with mobile...'
+    )

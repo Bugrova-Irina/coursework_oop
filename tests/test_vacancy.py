@@ -37,3 +37,19 @@ def test_as_dict_without_salary(instance_vacancy_without_salary):
         "description": "Work closely with mobile...",
     }
     assert instance_vacancy_without_salary.as_dict() == result
+
+
+def test_gte_when_salary_higher(instance_vacancy_high_salary, instance_vacancy):
+    """Проверяем случай, когда одна зарплата выше другой"""
+    assert instance_vacancy_high_salary.salary_from >= instance_vacancy.salary_from
+
+
+def test_gte_when_salary_is_the_same(instance_vacancy):
+    """Проверяем случай, когда одна зарплата равна другой"""
+    instance_vacancy_same_salary = instance_vacancy
+    assert instance_vacancy_same_salary.salary_from >= instance_vacancy.salary_from
+
+
+def test_gte_without_salary(instance_vacancy_without_salary, instance_vacancy):
+    """Проверяем случай, когда в одной вакансии зарплата не указана"""
+    assert instance_vacancy.salary_from >= instance_vacancy_without_salary.salary_from
