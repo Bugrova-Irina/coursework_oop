@@ -3,7 +3,7 @@ from typing import Any, Optional
 
 import requests
 
-from vacancy import Vacancy
+from src.vacancy import Vacancy
 
 
 class API(ABC):

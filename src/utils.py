@@ -43,19 +43,32 @@ class FileRepository(Repository):
                 content = json_file.read()
                 if not content:
                     return []  # Если файл пуст, возвращаем пустой список
-                vacancies = json.loads(content)
+                vacancies_data = json.loads(content)
 
-            return [
-                Vacancy(
-                    id=vacancy["id"],
-                    name=vacancy["name"],
-                    link=vacancy["link"],
-                    salary=vacancy.get("salary"),
-                    area=vacancy["area"],
-                    description=vacancy["description"],
+            loaded_vacancies = []
+            for vacancy in vacancies_data:
+                salary = None
+                if "salary" in vacancy:
+                    salary = vacancy["salary"]
+                elif "salary_from" in vacancy or "salary_to" in vacancy:
+                    salary = {
+                        "from": vacancy.get("salary_from", 0),
+                        "to": vacancy.get("salary_to", 0),
+                    }
+
+                loaded_vacancies.append(
+                    Vacancy(
+                        id=vacancy["id"],
+                        name=vacancy["name"],
+                        link=vacancy["link"],
+                        # salary=vacancy.get("salary"),
+                        salary=salary,
+                        area=vacancy["area"],
+                        description=vacancy["description"],
+                    )
                 )
-                for vacancy in vacancies
-            ]
+            return loaded_vacancies
+
         except FileNotFoundError:
             print(f"Файл {self.filename} не найден")
             return []
@@ -101,7 +114,7 @@ class FileRepository(Repository):
         """Получаем отфильтрованный по ключевому слову в названии вакансии список вакансий"""
         vacancies = self._read_json()
 
-        filtered_vacancies_by_keyword = []
+        # filtered_vacancies_by_keyword = []
         if keyword:  # если задано ключевое слово
             keyword_lower = keyword.lower()
             filtered_vacancies_by_keyword = [
@@ -110,9 +123,7 @@ class FileRepository(Repository):
         else:  # возвращаем список вакансий без фильтра по ключевому слову
             filtered_vacancies_by_keyword = vacancies.copy()
 
-        if (
-            top_n is not None
-        ):  # если задано кол-во вакансий для вывода, сортируем по зарплате
+        if top_n:  # если задано кол-во вакансий для вывода, сортируем по зарплате
             filtered_by_salary = [
                 v
                 for v in filtered_vacancies_by_keyword

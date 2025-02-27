@@ -36,6 +36,9 @@ class Vacancy:
 
     def get_salary(self) -> None:
         """Обработка данных о зарплате"""
+        self.salary_from = 0
+        self.salary_to = 0
+
         if self._salary:  # если есть данные о зарплате
             self.salary_from = self._salary.get("from") or 0
             self.salary_to = self._salary.get("to") or 0
@@ -62,26 +65,27 @@ class Vacancy:
 
     def as_dict(self) -> dict[str, Any]:
         """Представление данных в виде словаря"""
-        salary_data = {}
-        if self.salary_from > 0:
-            salary_data["salary_from"] = self.salary_from
-        if self.salary_to > 0:
-            salary_data["salary_to"] = self.salary_to
+        # salary_data = {}
+        # if self._salary:
+        #     salary_data["salary"] = self._salary
+        # if self.salary_from > 0:
+        #     salary_data["salary_from"] = self.salary_from
+        # if self.salary_to > 0:
+        #     salary_data["salary_to"] = self.salary_to
 
         result = {
             "id": self.id,
             "name": self.name,
             "link": self.link,
             "area": self.area,
-            # 'salary': self.get_salary(),
             "description": self.description,
-            # 'salary_from': self.salary_from,
-            # 'salary_to': self.salary_to,
-            **salary_data,
+            # **salary_data,
         }
 
-        # if self._salary:
-        #     result['salary'] = self._salary
+        if self.salary_from > 0:
+            result["salary_from"] = self.salary_from
+        if self.salary_to > 0:
+            result["salary_to"] = self.salary_to
 
         return result
 
