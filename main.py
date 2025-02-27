@@ -13,28 +13,30 @@ def user_interaction() -> None:
     # Получение данных с hh.ru
     vacancies_from_hh = HeadHunter(
         "https://api.hh.ru/vacancies",
-        {'User-Agent': 'HH-User-Agent'},
+        {"User-Agent": "HH-User-Agent"},
         {
-            'text': user_keyword,
-            'page': 0,
-            'per_page': 100,
+            "text": user_keyword,
+            "page": 0,
+            "per_page": 100,
         },
-        'Moscow',
+        "Moscow",
         1,
         10,
-        user_keyword
+        user_keyword,
     )
     formated_vacancies = vacancies_from_hh.get_vacancies()
     # print(formated_vacancies)
 
     # Сохраняем вакансии в файл
-    file_repository = FileRepository('../coursework_oop/data/data.json')
+    file_repository = FileRepository("../coursework_oop/data/data.json")
     file_repository.add(formated_vacancies)
 
     # Фильтруем вакансии
-    filtered_vacancies = file_repository.get_by_filters(top_n=user_top_n, keyword=user_keyword)
+    filtered_vacancies = file_repository.get_by_filters(
+        top_n=user_top_n, keyword=user_keyword
+    )
     print(filtered_vacancies)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     user_interaction()

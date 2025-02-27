@@ -22,7 +22,7 @@ def test_as_dict_with_salary(instance_vacancy):
         "area": "Ташкент",
         "description": "Work closely with mobile...",
         "salary_from": 100000,
-        "salary_to": 500000
+        "salary_to": 500000,
     }
     assert instance_vacancy.as_dict() == result
 

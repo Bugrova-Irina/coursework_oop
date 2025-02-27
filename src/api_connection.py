@@ -10,15 +10,14 @@ class API(ABC):
     """Абстрактный класс для работы с API"""
 
     def __init__(
-            self,
-            url: str,
-            headers: Optional[dict[str, str]],
-            params: Optional[dict[str, Any]],
-            city: str = 'Moscow',
-            number_of_city: int = 1,
-            page: int = 1,
-            keyword: str = 'Python',
-
+        self,
+        url: str,
+        headers: Optional[dict[str, str]],
+        params: Optional[dict[str, Any]],
+        city: str = "Moscow",
+        number_of_city: int = 1,
+        page: int = 1,
+        keyword: str = "Python",
     ):
         self.__url = url
         self.__headers = headers
@@ -50,19 +49,19 @@ class HeadHunter(API):
     """Класс для получения данных с сайта по API"""
 
     def __init__(
-            self,
-            url: str = "https://api.hh.ru/vacancies",
-            headers: Optional[dict[str, str]] = None,
-            params: Optional[dict[str, Any]] = None,
-            city: str = 'Moscow',
-            number_of_city: int = 1,
-            page: int = 1,
-            keyword: str = 'Python',
+        self,
+        url: str = "https://api.hh.ru/vacancies",
+        headers: Optional[dict[str, str]] = None,
+        params: Optional[dict[str, Any]] = None,
+        city: str = "Moscow",
+        number_of_city: int = 1,
+        page: int = 1,
+        keyword: str = "Python",
     ):
         super().__init__(
             url=url,
-            headers=headers or {'User-Agent': 'HH-User-Agent'},
-            params=params or {'text': '', 'page': 0, 'per_page': 100},
+            headers=headers or {"User-Agent": "HH-User-Agent"},
+            params=params or {"text": "", "page": 0, "per_page": 100},
             city=city,
             number_of_city=number_of_city,
             page=page,
@@ -84,14 +83,14 @@ class HeadHunter(API):
         data = self.get_row_vacancies()
         return [
             Vacancy(
-                id=item['id'],
-                name=item['name'],
-                link=item['alternate_url'],
-                salary=item.get('salary'),
-                area=item.get('area', {}).get('name', ''),
-                description=item.get('snippet', '').get('responsibility', ''),
+                id=item["id"],
+                name=item["name"],
+                link=item["alternate_url"],
+                salary=item.get("salary"),
+                area=item.get("area", {}).get("name", ""),
+                description=item.get("snippet", "").get("responsibility", ""),
             )
-            for item in data['items']
+            for item in data["items"]
         ]
 
 
