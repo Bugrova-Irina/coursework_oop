@@ -43,7 +43,7 @@ class TestHeadHunter(unittest.TestCase):
 
         mock_get.return_value = mock_response
 
-        hh = HeadHunter(**self.hh_params)
+        hh = HeadHunter()
 
         result = hh.get_row_vacancies()
 
@@ -61,7 +61,7 @@ class TestHeadHunter(unittest.TestCase):
         mock_response.raise_for_status.side_effect = Exception("API Error")
         mock_get.return_value = mock_response
 
-        hh = HeadHunter(**self.hh_params)
+        hh = HeadHunter()
 
         with self.assertRaises(Exception) as context:
             hh.get_row_vacancies()

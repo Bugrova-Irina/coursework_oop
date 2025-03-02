@@ -9,7 +9,7 @@ class Vacancy:
         "name",
         "link",
         "area",
-        "_salary",
+        "__salary",
         "description",
         "salary_from",
         "salary_to",
@@ -28,20 +28,20 @@ class Vacancy:
         self.name = name
         self.link = link
         self.area = area
-        self._salary = salary
+        self.__salary = salary
         self.description = description
         self.salary_from = 0
         self.salary_to = 0
-        self.get_salary()
+        self.__get_salary()
 
-    def get_salary(self) -> None:
+    def __get_salary(self) -> None:
         """Обработка данных о зарплате"""
         self.salary_from = 0
         self.salary_to = 0
 
-        if self._salary:  # если есть данные о зарплате
-            self.salary_from = self._salary.get("from") or 0
-            self.salary_to = self._salary.get("to") or 0
+        if self.__salary:  # если есть данные о зарплате
+            self.salary_from = self.__salary.get("from") or 0
+            self.salary_to = self.__salary.get("to") or 0
 
             # переводим в целые числа при необходимости
             # self.salary_from = int(self.salary_from) if self.salary_from else 0

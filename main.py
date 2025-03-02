@@ -12,17 +12,17 @@ def user_interaction() -> None:
 
     # Получение данных с hh.ru
     vacancies_from_hh = HeadHunter(
-        "https://api.hh.ru/vacancies",
-        {"User-Agent": "HH-User-Agent"},
-        {
-            "text": user_keyword,
-            "page": 0,
-            "per_page": 100,
-        },
-        "Moscow",
-        1,
-        10,
-        user_keyword,
+        # "https://api.hh.ru/vacancies",
+        # {"User-Agent": "HH-User-Agent"},
+        # {
+        #     "text": user_keyword,
+        #     "page": 0,
+        #     "per_page": 100,
+        # },
+        # "Moscow",
+        # 1,
+        # 10,
+        # user_keyword,
     )
     formated_vacancies = vacancies_from_hh.get_vacancies()
     # print(formated_vacancies)
