@@ -45,7 +45,7 @@ class TestHeadHunter(unittest.TestCase):
 
         hh = HeadHunter()
 
-        result = hh.get_row_vacancies()
+        result = hh._get_row_vacancies()
 
         mock_get.assert_called_once_with(
             self.hh_params["url"],
@@ -64,7 +64,7 @@ class TestHeadHunter(unittest.TestCase):
         hh = HeadHunter()
 
         with self.assertRaises(Exception) as context:
-            hh.get_row_vacancies()
+            hh._get_row_vacancies()
 
         self.assertIn("API Error", str(context.exception))
         mock_response.raise_for_status.assert_called_once()
@@ -82,6 +82,6 @@ def test_get_row_vacancies(mock_response, row_vacancies):
     """Проверяет получение необработанных данных о вакансиях с сайта hh.ru"""
     with patch("requests.get", return_value=mock_response) as mock_get:
         hh = HeadHunter()
-        result = hh.get_row_vacancies()
+        result = hh._get_row_vacancies()
         assert result == row_vacancies
         mock_get.assert_called_once()

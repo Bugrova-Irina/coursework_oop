@@ -10,7 +10,7 @@ class API(ABC):
     """Абстрактный класс для работы с API"""
 
     @abstractmethod
-    def __init__(self):
+    def _get_row_vacancies(self) -> dict[str, Any]:
         pass
 
     @abstractmethod
@@ -37,7 +37,6 @@ class HeadHunter(API):
         # self.city = city
         # self.number_of_city = number_of_city
         # self.keyword = keyword
-        super().__init__()
 
     @property
     def url(self) -> str:
@@ -66,7 +65,7 @@ class HeadHunter(API):
         #     keyword=keyword,
         # )
 
-    def get_row_vacancies(self) -> dict[str, Any]:
+    def _get_row_vacancies(self) -> dict[str, Any]:
         """Получение списка вакансий с сайта"""
         response = requests.get(self.url, headers=self.headers, params=self.params)
         try:
@@ -78,7 +77,7 @@ class HeadHunter(API):
 
     def get_vacancies(self) -> list[Vacancy]:
         """преобразование данных о вакансиях в нужный формат"""
-        data = self.get_row_vacancies()
+        data = self._get_row_vacancies()
         return [
             Vacancy(
                 id=item["id"],

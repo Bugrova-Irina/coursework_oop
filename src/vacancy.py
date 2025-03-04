@@ -30,28 +30,52 @@ class Vacancy:
         self.area = area
         self.__salary = salary
         self.description = description
-        self.salary_from = 0
-        self.salary_to = 0
-        self.__get_salary()
+        self.salary_from = self.__validate_salary_from()
+        self.salary_to = self.__validate_salary_to()
+        # self.__get_salary()
 
-    def __get_salary(self) -> None:
-        """Обработка данных о зарплате"""
+    def __validate_salary_from(self) -> int:
+        """Валидация данных по зарплате для поля 'от'"""
         self.salary_from = 0
-        self.salary_to = 0
-
         if self.__salary:  # если есть данные о зарплате
             self.salary_from = self.__salary.get("from") or 0
+
+            # переводим в целые числа при необходимости
+            try:
+                self.salary_from = int(self.salary_from)
+            except (TypeError, ValueError):
+                self.salary_from = 0
+        return self.salary_from
+
+    def __validate_salary_to(self) -> int:
+        """Валидация данных по зарплате для поля 'до'"""
+        self.salary_to = 0
+        if self.__salary:  # если есть данные о зарплате
             self.salary_to = self.__salary.get("to") or 0
 
             # переводим в целые числа при необходимости
-            # self.salary_from = int(self.salary_from) if self.salary_from else 0
-            # self.salary_to = int(self.salary_to) if self.salary_to else 0
             try:
-                self.salary_from = int(self.salary_from)
                 self.salary_to = int(self.salary_to)
             except (TypeError, ValueError):
-                self.salary_from = 0
                 self.salary_to = 0
+        return self.salary_to
+
+    # def __get_salary(self) -> None:
+    #     """Обработка данных о зарплате"""
+    #     self.salary_from = 0
+    #     self.salary_to = 0
+    #
+    #     if self.__salary:  # если есть данные о зарплате
+    #         self.salary_from = self.__salary.get("from") or 0
+    #         self.salary_to = self.__salary.get("to") or 0
+    #
+    #         # переводим в целые числа при необходимости
+    #         try:
+    #             self.salary_from = int(self.salary_from)
+    #             self.salary_to = int(self.salary_to)
+    #         except (TypeError, ValueError):
+    #             self.salary_from = 0
+    #             self.salary_to = 0
 
     def __gte__(self, other):
         """Сравнение зарплат"""
