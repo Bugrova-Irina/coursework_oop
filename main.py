@@ -11,19 +11,7 @@ def user_interaction() -> None:
     user_top_n = int(input("Введите количество вакансий, которые нужно вывести\n"))
 
     # Получение данных с hh.ru
-    vacancies_from_hh = HeadHunter(
-        # "https://api.hh.ru/vacancies",
-        # {"User-Agent": "HH-User-Agent"},
-        # {
-        #     "text": user_keyword,
-        #     "page": 0,
-        #     "per_page": 100,
-        # },
-        # "Moscow",
-        # 1,
-        # 10,
-        # user_keyword,
-    )
+    vacancies_from_hh = HeadHunter(user_keyword)
     formated_vacancies = vacancies_from_hh.get_vacancies()
     # print(formated_vacancies)
 
@@ -35,7 +23,9 @@ def user_interaction() -> None:
     filtered_vacancies = file_repository.get_by_filters(
         top_n=user_top_n, keyword=user_keyword
     )
-    print(filtered_vacancies)
+
+    for vacancy in filtered_vacancies:
+        print(vacancy)
 
 
 if __name__ == "__main__":

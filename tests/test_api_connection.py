@@ -27,7 +27,7 @@ class TestHeadHunter(unittest.TestCase):
         self.hh_params = {
             "url": "https://api.hh.ru/vacancies",
             "headers": {"User-Agent": "HH-User-Agent"},
-            "params": {"text": "", "page": 0, "per_page": 100},
+            "params": {"text": "python", "search_field": "name", "page": 0, "per_page": 100},
             "city": "Moscow",
             "number_of_city": 1,
             "page": 1,
@@ -43,7 +43,7 @@ class TestHeadHunter(unittest.TestCase):
 
         mock_get.return_value = mock_response
 
-        hh = HeadHunter()
+        hh = HeadHunter("python")
 
         result = hh._get_row_vacancies()
 
@@ -61,7 +61,7 @@ class TestHeadHunter(unittest.TestCase):
         mock_response.raise_for_status.side_effect = Exception("API Error")
         mock_get.return_value = mock_response
 
-        hh = HeadHunter()
+        hh = HeadHunter("python")
 
         with self.assertRaises(Exception) as context:
             hh._get_row_vacancies()
@@ -73,7 +73,7 @@ class TestHeadHunter(unittest.TestCase):
 def test_get_vacancies_success(mock_response, hh_vacancy):
     """Проверяем возврат объектов класса Vacancy в нужном формате"""
     with patch("requests.get", return_value=mock_response):
-        hh = HeadHunter()
+        hh = HeadHunter("python")
         result = hh.get_vacancies()
         assert str(result) == str(hh_vacancy)
 
@@ -81,7 +81,7 @@ def test_get_vacancies_success(mock_response, hh_vacancy):
 def test_get_row_vacancies(mock_response, row_vacancies):
     """Проверяет получение необработанных данных о вакансиях с сайта hh.ru"""
     with patch("requests.get", return_value=mock_response) as mock_get:
-        hh = HeadHunter()
+        hh = HeadHunter("python")
         result = hh._get_row_vacancies()
         assert result == row_vacancies
         mock_get.assert_called_once()

@@ -20,6 +20,7 @@ class API(ABC):
 
 class HeadHunter(API):
     """Класс для получения данных с сайта по API"""
+
     # url: str = "https://api.hh.ru/vacancies",
     # headers: Optional[dict[str, str]] = None,
     # params: Optional[dict[str, Any]] = None,
@@ -28,10 +29,15 @@ class HeadHunter(API):
     # page: int = 1,
     # keyword: str = "Python",
 
-    def __init__(self):
+    def __init__(self, user_keyword: str):
         self.__url = "https://api.hh.ru/vacancies"
         self.__headers = {"User-Agent": "HH-User-Agent"}
-        self.__params = {"text": "", "page": 0, "per_page": 100}
+        self.__params = {
+            "text": user_keyword,
+            "search_field": "name",
+            "page": 0,
+            "per_page": 100,
+        }
         self.__vacancies = []
         # self.page = page
         # self.city = city
@@ -53,7 +59,6 @@ class HeadHunter(API):
     @property
     def vacancies(self) -> list:
         return self.__vacancies
-
 
         # super().__init__(
         #     url=url,

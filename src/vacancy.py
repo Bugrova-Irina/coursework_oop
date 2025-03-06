@@ -113,9 +113,12 @@ class Vacancy:
 
         return result
 
-    def __repr__(self):
+    def __str__(self):
         """Представление для объектов класса Vacancy"""
         return (
             f"Vacancy(id={self.id}, name ='{self.name}', salary_from={self.salary_from}, "
             f"salary_to={self.salary_to}, link='{self.link}')"
         )
+
+    def __repr__(self):
+        return self.__str__()
