@@ -24,7 +24,7 @@
 
 1. Клонируйте репозиторий:
 ```
-https://github.com/Bugrova-Irina/coursework_oop/
+https://github.com/Bugrova-Irina/job_posting_parser/
 ```
 2. Установите зависимости:
 ```
